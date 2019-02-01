@@ -7,10 +7,10 @@ from time import sleep
 
 
 def main():
-    config = configparser.RawConfigParser()
-    config.reados.path.join( os.path.dirname( __file__ ), 'conf', 'config.ini' ))
+    config = configparser.ConfigParser()
+    config.read(os.path.join(os.path.abspath(os.getcwd())), 'conf', 'config.ini'))
     if not config.sections():
-	    raise Exception("Empty or missing config file")
+    	raise Exception("Empty or missing config file")
     os.system('clear')
     request = requests.get(config['checker']['url'])
     status_code = int(request.status_code)
@@ -30,7 +30,7 @@ def main():
         command = 'supervisorctl restart all'
         if 'venv' in config['checker']:
         	command = 'source {};'.format(config['checker']['venv']) + command
-        subprocess.call(command, shell=True)
+        subprocess.call([command], shell=True)
         sleep(0.5)
         request = requests.get(config['checker']['url'])
         status_code = request.status_code
