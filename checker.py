@@ -8,7 +8,7 @@ from time import sleep
 
 def main():
     config = configparser.RawConfigParser()
-    config.read(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'conf', 'config.ini')
+    config.reados.path.join( os.path.dirname( __file__ ), 'conf', 'config.ini' ))
     if not config.sections():
 	    raise Exception("Empty or missing config file")
     os.system('clear')
