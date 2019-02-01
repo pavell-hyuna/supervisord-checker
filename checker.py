@@ -7,7 +7,7 @@ from time import sleep
 
 
 def main():
-    config = configparser.ConfigParser()
+    config = configparser.RawConfigParser()
     config.read('config.ini')
     if not config.sections():
     	raise Exception("Empty or missing config file")
