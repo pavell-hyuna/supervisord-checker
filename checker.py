@@ -4,11 +4,15 @@ import subprocess
 import smtplib
 import os
 from time import sleep
+from inspect import currentframe, getframeinfo
+from pathlib import Path
 
 
 def main():
     config = configparser.ConfigParser()
-    config.read( ['config.ini', os.path.join(os.getcwd())])
+    filename = getframeinfo(currentframe()).filename
+    parent = Path(filename).resolve().parent
+    config.read_file(open('{}/config.ini'.format(parent)))
     if not config.sections():
     	raise Exception("Empty or missing config file")
     os.system('clear')
